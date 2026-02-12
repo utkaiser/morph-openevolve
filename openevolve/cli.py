@@ -126,6 +126,8 @@ async def main_async() -> int:
         # Override log level if specified
         if args.log_level:
             logging.getLogger().setLevel(getattr(logging, args.log_level))
+            # Suppress noisy HTTP request logs from httpx
+            logging.getLogger("httpx").setLevel(logging.WARNING)
 
         # Run evolution
         best_program = await openevolve.run(

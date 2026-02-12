@@ -170,7 +170,7 @@ class OpenAILLM(LLMInterface):
         seed = kwargs.get("seed", self.random_seed)
         if seed is not None and not self.manual_mode:
             if self.api_base == "https://generativelanguage.googleapis.com/v1beta/openai/":
-                logger.warning(
+                logger.debug(
                     "Skipping seed parameter as Google AI Studio endpoint doesn't support it. "
                     "Reproducibility may be limited."
                 )

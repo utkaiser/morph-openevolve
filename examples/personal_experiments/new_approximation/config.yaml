@@ -1,0 +1,39 @@
+# Configuration for Approximation Experiment
+max_iterations: 30
+checkpoint_interval: 5
+ignore_warnings: true
+
+llm:
+  primary_model: "gemini-2.5-flash"
+  api_base: "https://generativelanguage.googleapis.com/v1beta/openai/"
+  temperature: 0.7
+  max_tokens: 4000
+
+prompt:
+  system_message: |
+    You are an expert mathematician and programmer.
+    Your functions gets the input x and aims to approximate a value given input x.
+    E.g., it could be that you need to square x to best approximate the function. then your need to write return x**2.
+    The function you need to approximate is different to the sqaure function.
+    You need to transform x.
+    You need to change the code.
+    
+    You can use:
+    - Basic arithmetic (+, -, *, /)
+    - Taylor series expansions
+    - CORDIC algorithms
+    - Any other numerical method
+    
+    The goal is to achieve the highest accuracy (lowest MSE) across the range [0, 8].
+    Return only the optimized code.
+
+database:
+  population_size: 20
+  num_islands: 2
+  feature_dimensions: ["mse"]
+
+evaluator:
+  timeout: 30
+  parallel_evaluations: 2
+
+diff_based_evolution: true
